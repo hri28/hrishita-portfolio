@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import type { Variants } from "framer-motion";
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
@@ -11,7 +10,7 @@ export default function Hero() {
   const [typingComplete, setTypingComplete] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  const easeBezier: [number, number, number, number] = [0.16, 1, 0.3, 1];
+  const easeBezier = [0.16, 1, 0.3, 1] as const;
   
   useEffect(() => {
     setMounted(true);
@@ -60,7 +59,7 @@ const containerVariants = {
 };
 
 // Child elements animation
-const itemVariants: Variants = {
+const itemVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
@@ -70,7 +69,7 @@ const itemVariants: Variants = {
 };
 
 // Browser dots animation
-const dotVariants: Variants = {
+const dotVariants = {
   hidden: { scale: 0 },
   visible: (i: number) => ({
     scale: 1,
@@ -84,7 +83,7 @@ const dotVariants: Variants = {
 };
 
 // Button hover animation
-const buttonVariants: Variants = {
+const buttonVariants = {
   rest: { scale: 1 },
   hover: {
     scale: 1.05,
