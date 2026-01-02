@@ -7,12 +7,16 @@ export default function Navbar() {
       </div>
 
       {/* Right: Resume button */}
-      <a
-        href="/resume.pdf"
-        className="font-mono text-sm px-4 py-2 border border-white/40 rounded-md hover:bg-white hover:text-black transition"
-      >
-        resume
-      </a>
+<a
+  href="/HRISHITA_CV_WITHOUT_PHONE.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="relative z-50 inline-flex font-mono text-sm px-4 py-2 border border-white/30 rounded-md hover:bg-white/10 transition"
+>
+  Resume
+</a>
+
+
     </header>
   );
 }

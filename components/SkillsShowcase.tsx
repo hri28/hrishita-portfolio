@@ -77,11 +77,13 @@ function SkillCard({
   accent,
   glow,
   animate,
+  index
 }: {
   item: SkillItem;
   accent: string;
   glow: string;
   animate: boolean;
+  index: number
 }) {
   const Icon = item.icon;
 
@@ -130,20 +132,22 @@ function SkillCard({
             </div>
 
             {/* ✅ Progress bar under each framework */}
-            <div className="mt-3 h-[7px] w-full rounded-full bg-white/10 overflow-hidden relative">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={animate ? { width: `${item.level}%` } : { width: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="h-full rounded-full"
-                style={{
-                  background: accent,
-                  boxShadow: `0 0 18px ${glow}`,
-                }}
-              />
-              {/* subtle sheen */}
-              <div className="absolute inset-0 pointer-events-none opacity-25 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            </div>
+{/* ✅ Smooth progress bar (scaleX instead of width) */}
+<div className="mt-3 h-[7px] w-full rounded-full bg-white/10 overflow-hidden relative">
+  <motion.div
+    className="h-full rounded-full will-change-transform"
+    style={{
+      background: accent,
+      boxShadow: `0 0 18px ${glow}`,
+      transformOrigin: "0% 50%",
+    }}
+    initial={{ scaleX: 0 }}
+    animate={animate ? { scaleX: item.level / 100 } : { scaleX: 0 }}
+    transition={{ duration: 0.75,delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+  />
+  <div className="absolute inset-0 pointer-events-none opacity-20 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+</div>
+
           </div>
         </div>
       </div>
@@ -187,7 +191,7 @@ export default function SkillsShowcase({ animate }: { animate: boolean }) {
             className="absolute -bottom-56 -right-56 h-[620px] w-[620px] rounded-full blur-3xl opacity-10"
             style={{ background: meta.color }}
           />
-          <div className="absolute inset-0 opacity-[0.05] [background:linear-gradient(transparent_0,rgba(255,255,255,0.8)_1px,transparent_2px)] [background-size:100%_28px]" />
+          {/* <div className="absolute inset-0 opacity-[0.05] [background:linear-gradient(transparent_0,rgba(255,255,255,0.8)_1px,transparent_2px)] [background-size:100%_28px]" /> */}
         </div>
 
         {/* header */}
@@ -248,13 +252,14 @@ export default function SkillsShowcase({ animate }: { animate: boolean }) {
               transition={{ duration: 0.25 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
             >
-              {filtered.map((item) => (
+              {filtered.map((item, index) => (
                 <SkillCard
                   key={item.name}
                   item={item}
                   accent={meta.color}
                   glow={meta.glow}
                   animate={animate}
+                  index={index}
                 />
               ))}
             </motion.div>
