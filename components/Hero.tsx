@@ -9,6 +9,8 @@ export default function Hero() {
   const [startTyping, setStartTyping] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  const easeBezier: [number, number, number, number] = [0.16, 1, 0.3, 1];
   
   useEffect(() => {
     setMounted(true);
@@ -48,7 +50,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        ease: easeBezier,
         staggerChildren: 0.2,
       },
     },
@@ -60,7 +62,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.6, ease: easeBezier},
     },
   };
 
@@ -71,7 +73,7 @@ export default function Hero() {
       scale: 1,
       transition: {
         delay: 0.3 + i * 0.1,
-        type: "spring",
+        type: "spring" as const,
         stiffness: 260,
         damping: 20,
       },
@@ -84,7 +86,7 @@ export default function Hero() {
     hover: {
       scale: 1.05,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 10,
       },
