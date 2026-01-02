@@ -43,9 +43,9 @@ export default function Hero() {
     return () => clearInterval(typingInterval);
   }, [startTyping]);
 
-  // Container animation
-  // Container animation
-const containerVariants: Variants = {
+
+// Container animation
+const containerVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -54,6 +54,7 @@ const containerVariants: Variants = {
       duration: 0.8,
       ease: easeBezier,
       staggerChildren: 0.2,
+      when: "beforeChildren" as const,
     },
   },
 };
