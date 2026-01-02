@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import type { Variants } from "framer-motion";
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
@@ -43,56 +44,58 @@ export default function Hero() {
   }, [startTyping]);
 
   // Container animation
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: easeBezier,
-        staggerChildren: 0.2,
-      },
+  // Container animation
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: easeBezier,
+      staggerChildren: 0.2,
     },
-  };
+  },
+};
 
-  // Child elements animation
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: easeBezier},
-    },
-  };
+// Child elements animation
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easeBezier },
+  },
+};
 
-  // Browser dots animation
-  const dotVariants = {
-    hidden: { scale: 0 },
-    visible: (i: number) => ({
-      scale: 1,
-      transition: {
-        delay: 0.3 + i * 0.1,
-        type: "spring" as const,
-        stiffness: 260,
-        damping: 20,
-      },
-    }),
-  };
+// Browser dots animation
+const dotVariants: Variants = {
+  hidden: { scale: 0 },
+  visible: (i: number) => ({
+    scale: 1,
+    transition: {
+      delay: 0.3 + i * 0.1,
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    } as const,
+  }),
+};
 
-  // Button hover animation
-  const buttonVariants = {
-    rest: { scale: 1 },
-    hover: {
-      scale: 1.05,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-    tap: { scale: 0.95 },
-  };
+// Button hover animation
+const buttonVariants: Variants = {
+  rest: { scale: 1 },
+  hover: {
+    scale: 1.05,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 10,
+    } as const,
+  },
+  tap: { scale: 0.95 },
+};
+
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
